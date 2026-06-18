@@ -14,26 +14,52 @@ const gameBoard = [
 // 3 4 5
 // 6 7 8
 
-const players = [];
+const players = ["player1", "player2"];
 
-function addPlayer () {
-    if (players.length < 2){
-        const name = window.prompt("insert player name:");
-        if (name.length > 0) {
-            let score = 0;
-            const getScore= () => score;
-            const giveScore = () => { score++; };
-            players.push({name, getScore, giveScore})
-            }
-        else {
-            window.alert("Player name can't be empty");
-        }
+let turn = 1
+function activePlayer () { //cycle between players
+    if (turn === 0) {
+        turn = 1;
+        console.log("player2 turn");
+        return "player2";
     }
-    else {
-        window.alert("Players already defined, reload page to change players");
+    else if (turn === 1) {
+        turn = 0;
+        console.log("player1 turn");
+        return "player1";
     }
 }
 
-document.getElementById("addPlayer").onclick = addPlayer;
+function plrInput () {
+    return window.prompt("make a move:");
+}
 
 
+function playRound (player, box) {  //play a round for the active player
+    if (player === players[0]) {
+        gameBoard[box] = "X";
+        }
+    else if (player === players[1]) {
+        gameBoard[box] = "O";
+        }
+}
+
+function refreshBoard () { //for now just print the board on console
+    console.log(gameBoard[0], gameBoard[1], gameBoard [2]);
+    console.log(gameBoard[3], gameBoard[4], gameBoard [5]);
+    console.log(gameBoard[6], gameBoard[7], gameBoard [8]);
+}
+
+function checkWin() {
+    game ();
+}
+
+function game () {
+    const player = activePlayer();
+    const box = plrInput(player);
+    playRound (player, box);
+    refreshBoard();
+    checkWin();
+}
+
+game();
