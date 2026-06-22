@@ -50,11 +50,38 @@ function refreshBoard () { //for now just print the board on console
     console.log(gameBoard[6], gameBoard[7], gameBoard [8]);
 }
 
-function game () {
-    const player = activePlayer();
-    const box = plrInput();
-    playRound (player, box);
-    refreshBoard();
+function chkWin () {
+    if (gameBoard[0] === "X" && gameBoard[1] === "X" && gameBoard [2] === "X" ||
+        gameBoard[3] === "X" && gameBoard[4] === "X" && gameBoard [5] === "X" ||
+        gameBoard[6] === "X" && gameBoard[7] === "X" && gameBoard [8] === "X" ||
+        gameBoard[0] === "X" && gameBoard[4] === "X" && gameBoard [8] === "X" ||
+        gameBoard[2] === "X" && gameBoard[4] === "X" && gameBoard [6] === "X" ||
+        gameBoard[0] === "X" && gameBoard[3] === "X" && gameBoard [6] === "X" ||
+        gameBoard[1] === "X" && gameBoard[4] === "X" && gameBoard [7] === "X" ||
+        gameBoard[2] === "X" && gameBoard[5] === "X" && gameBoard [8] === "X") {
+            console.log(players[0] + "WINS!");
+        }
+    else if (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard [2] === "O" ||
+        gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard [5] === "O" ||
+        gameBoard[6] === "O" && gameBoard[7] === "O" && gameBoard [8] === "O" ||
+        gameBoard[0] === "O" && gameBoard[4] === "O" && gameBoard [8] === "O" ||
+        gameBoard[2] === "O" && gameBoard[4] === "O" && gameBoard [6] === "O" ||
+        gameBoard[0] === "O" && gameBoard[3] === "O" && gameBoard [6] === "O" ||
+        gameBoard[1] === "O" && gameBoard[4] === "O" && gameBoard [7] === "O" ||
+        gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard [8] === "O") {
+            console.log(players[1] + "WINS!");
+        }
+    else {
+        round ();
+    }
 }
 
-document.getElementById("play").onclick = game;
+function round () {
+    const player = activePlayer();
+    const box = plrInput();
+    playRound(player, box);
+    refreshBoard();
+    chkWin();
+}
+
+document.getElementById("play").onclick = round;
