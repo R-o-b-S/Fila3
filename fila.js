@@ -50,16 +50,11 @@ function refreshBoard () { //for now just print the board on console
     console.log(gameBoard[6], gameBoard[7], gameBoard [8]);
 }
 
-function checkWin() {
-    game ();
-}
-
 function game () {
     const player = activePlayer();
-    const box = plrInput(player);
+    const box = plrInput();
     playRound (player, box);
     refreshBoard();
-    checkWin();
 }
 
-game();
+document.getElementById("play").onclick = game;
