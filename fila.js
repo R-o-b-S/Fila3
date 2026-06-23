@@ -30,10 +30,6 @@ function activePlayer () { //cycle between players
     }
 }
 
-function plrInput () {
-    return window.prompt("make a move:");
-}
-
 
 function playRound (player, box) {  //play a round for the active player
     if (player === players[0]) {
@@ -71,22 +67,18 @@ function chkWin () {
         gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard [8] === "O") {
             console.log(players[1] + "WINS!");
         }
-    else {
-        round ();
-    }
 }
 
-function round () {
+function round (a) {
     const player = activePlayer();
-    const box = plrInput();
+    const box = a.substr(3,1);
+    console.log(box);
     playRound(player, box);
     refreshBoard();
     clearBoard();
     displayBoard();
     chkWin();
 }
-
-document.getElementById("play").onclick = round;
 
 function displayBoard () {
     for (i=0; i<9; i++) {
@@ -96,6 +88,9 @@ function displayBoard () {
         if (gameBoard[i] === "X" || gameBoard[i] === "O"){
             let txt = gameBoard[i];
             newDiv.textContent = txt;
+        }
+        else if (gameBoard[i] === "empty"){
+            newDiv.addEventListener("click", () => round(newDiv.id));
         }
         document.getElementById("board").appendChild(newDiv);
     }
