@@ -81,7 +81,32 @@ function round () {
     const box = plrInput();
     playRound(player, box);
     refreshBoard();
+    clearBoard();
+    displayBoard();
     chkWin();
 }
 
 document.getElementById("play").onclick = round;
+
+function displayBoard () {
+    for (i=0; i<9; i++) {
+        const newDiv = document.createElement("div");
+        newDiv.classList = "box";
+        newDiv.id = "box"+i;
+        if (gameBoard[i] === "X" || gameBoard[i] === "O"){
+            let txt = gameBoard[i];
+            newDiv.textContent = txt;
+        }
+        document.getElementById("board").appendChild(newDiv);
+    }
+}
+
+function clearBoard () {
+    for (i=0; i<9; i++) {
+        const element = document.getElementById("box"+i);
+        element.remove();
+        }
+    }
+
+
+displayBoard();
