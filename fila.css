@@ -49,5 +49,11 @@ body {
     text-align: center;
 }
 
+#newGame {
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    padding: 2rem;
+}
 
 

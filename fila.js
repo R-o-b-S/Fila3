@@ -137,5 +137,16 @@ function round (a) { //plays a round
     chkWin();
 }
 
+function newGame () { //starts a new game
+    for (i=0; i<9; i++) {  
+        gameBoard[i] = "empty";
+    }
+    clearBoard();
+    displayBoard();
+    turn = Math.floor(Math.random() * 2);
+    updateActivePlr(turn);
+}
+
 displayBoard(); //needed to display the board on page loading
 updateActivePlr(turn); //needed to display active player on page loading
+document.getElementById("newG").onclick = newGame; //start a new game
