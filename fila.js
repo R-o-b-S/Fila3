@@ -16,18 +16,28 @@ const gameBoard = [
 
 const players = ["player1", "player2"];
 
-let turn = 1
+let turn = Math.floor(Math.random() * 2);
 function activePlayer () { //cycle between players
     if (turn === 0) {
         turn = 1;
-        console.log("player2 turn");
-        return "player2";
+        updateActivePlr(turn);
+        return players[0];
     }
     else if (turn === 1) {
         turn = 0;
-        console.log("player1 turn");
-        return "player1";
+        updateActivePlr(turn);
+        return players[1];
     }
+}
+
+function updateActivePlr(t) { //update thedisplayed active player
+    const element = document.getElementById("acti");
+    element.remove();
+    const p = document.createElement("p");
+    p.id = "acti";
+    const txt = "It's " + players[t] + " turn!";
+    p.textContent = txt;
+    document.getElementById("activePlr").appendChild(p);
 }
 
 
@@ -40,13 +50,7 @@ function playRound (player, box) {  //play a round for the active player
         }
 }
 
-function refreshBoard () { //for now just print the board on console
-    console.log(gameBoard[0], gameBoard[1], gameBoard [2]);
-    console.log(gameBoard[3], gameBoard[4], gameBoard [5]);
-    console.log(gameBoard[6], gameBoard[7], gameBoard [8]);
-}
-
-function chkWin () {
+function chkWin () { //check if the game is won by one of the players
     if (gameBoard[0] === "X" && gameBoard[1] === "X" && gameBoard [2] === "X" ||
         gameBoard[3] === "X" && gameBoard[4] === "X" && gameBoard [5] === "X" ||
         gameBoard[6] === "X" && gameBoard[7] === "X" && gameBoard [8] === "X" ||
@@ -55,7 +59,7 @@ function chkWin () {
         gameBoard[0] === "X" && gameBoard[3] === "X" && gameBoard [6] === "X" ||
         gameBoard[1] === "X" && gameBoard[4] === "X" && gameBoard [7] === "X" ||
         gameBoard[2] === "X" && gameBoard[5] === "X" && gameBoard [8] === "X") {
-            console.log(players[0] + "WINS!");
+            window.alert(players[0] + " WINS!");
         }
     else if (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard [2] === "O" ||
         gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard [5] === "O" ||
@@ -65,22 +69,11 @@ function chkWin () {
         gameBoard[0] === "O" && gameBoard[3] === "O" && gameBoard [6] === "O" ||
         gameBoard[1] === "O" && gameBoard[4] === "O" && gameBoard [7] === "O" ||
         gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard [8] === "O") {
-            console.log(players[1] + "WINS!");
+            window.alert(players[1] + " WINS!");
         }
 }
 
-function round (a) {
-    const player = activePlayer();
-    const box = a.substr(3,1);
-    console.log(box);
-    playRound(player, box);
-    refreshBoard();
-    clearBoard();
-    displayBoard();
-    chkWin();
-}
-
-function displayBoard () {
+function displayBoard () { //renders the board on the web page
     for (i=0; i<9; i++) {
         const newDiv = document.createElement("div");
         newDiv.classList = "box";
@@ -96,12 +89,21 @@ function displayBoard () {
     }
 }
 
-function clearBoard () {
+function clearBoard () { //clear the board for a new game
     for (i=0; i<9; i++) {
         const element = document.getElementById("box"+i);
         element.remove();
         }
     }
 
+function round (a) { //plays a round
+    const player = activePlayer();
+    const box = a.substr(3,1);
+    playRound(player, box);
+    clearBoard();
+    displayBoard();
+    chkWin();
+}
 
-displayBoard();
+displayBoard(); //needed to display the board on page loading
+updateActivePlr(turn); //needed to display active player on page loading
