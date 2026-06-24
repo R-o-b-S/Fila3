@@ -39,13 +39,15 @@ body {
     
 }
 
-
 .player {
     font-weight: 500;
     font-size: 1.4rem;
     color: blueviolet;
 }
 
+#activePlr {
+    text-align: center;
+}
 
 
 

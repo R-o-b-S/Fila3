@@ -17,7 +17,7 @@ const gameBoard = [
 const players = ["player1", "player2"];
 
 let turn = Math.floor(Math.random() * 2);
-function activePlayer () { //cycle between players
+function activePlayer () { //cycle turns between players 
     if (turn === 0) {
         turn = 1;
         updateActivePlr(turn);
@@ -30,7 +30,7 @@ function activePlayer () { //cycle between players
     }
 }
 
-function updateActivePlr(t) { //update thedisplayed active player
+function updateActivePlr(t) { //update the displayed active player
     const element = document.getElementById("acti");
     element.remove();
     const p = document.createElement("p");
@@ -59,7 +59,14 @@ function chkWin () { //check if the game is won by one of the players
         gameBoard[0] === "X" && gameBoard[3] === "X" && gameBoard [6] === "X" ||
         gameBoard[1] === "X" && gameBoard[4] === "X" && gameBoard [7] === "X" ||
         gameBoard[2] === "X" && gameBoard[5] === "X" && gameBoard [8] === "X") {
-            window.alert(players[0] + " WINS!");
+            window.alert(players[0] + " wins!");
+            for (i=0; i<9; i++) {  //prevents player to keep the game after someone won
+                if (gameBoard[i] === "empty") {
+                    gameBoard[i] = "gameover";
+                }
+            }
+            clearBoard();
+            displayBoard();
         }
     else if (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard [2] === "O" ||
         gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard [5] === "O" ||
@@ -69,7 +76,14 @@ function chkWin () { //check if the game is won by one of the players
         gameBoard[0] === "O" && gameBoard[3] === "O" && gameBoard [6] === "O" ||
         gameBoard[1] === "O" && gameBoard[4] === "O" && gameBoard [7] === "O" ||
         gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard [8] === "O") {
-            window.alert(players[1] + " WINS!");
+            window.alert(players[1] + " wins!");
+            for (i=0; i<9; i++) { //prevents player to keep the game after someone won
+                if (gameBoard[i] === "empty") {
+                    gameBoard[i] = "gameover";
+                }
+            }
+            clearBoard();
+            displayBoard();
         }
 }
 
