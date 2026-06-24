@@ -107,7 +107,7 @@ function chkWin () { //check if the game is won by one of the players
             element.remove();
             const p = document.createElement("p");
             p.id = "acti";
-            const txt = players[0].name + " won!";
+            const txt = players[1].name + " won!";
             p.textContent = txt;
             document.getElementById("activePlr").appendChild(p);
             //the following increases the winner score
@@ -183,3 +183,17 @@ function scoreRefresh (w) { //add score points and refresh value on screen
 displayBoard(); //needed to display the board on page loading
 updateActivePlr(turn); //needed to display active player on page loading
 document.getElementById("newG").onclick = newGame; //start a new game
+
+//allows to change player1 name clicking on it
+document.getElementById("one").addEventListener("click", function () {
+  players[0].name=window.prompt("new player 1 name:");
+  document.getElementById("one").textContent = players[0].name;
+  updateActivePlr(turn);
+});
+
+//allows to change player2 name clicking on it
+document.getElementById("two").addEventListener("click", function () {
+  players[1].name=window.prompt("new player 2 name:");
+  document.getElementById("two").textContent = players[1].name;
+  updateActivePlr(turn);
+});
