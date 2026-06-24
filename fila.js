@@ -60,13 +60,22 @@ function chkWin () { //check if the game is won by one of the players
         gameBoard[1] === "X" && gameBoard[4] === "X" && gameBoard [7] === "X" ||
         gameBoard[2] === "X" && gameBoard[5] === "X" && gameBoard [8] === "X") {
             window.alert(players[0] + " wins!");
-            for (i=0; i<9; i++) {  //prevents player to keep the game after someone won
+            //the following prevents player to keep the game after someone won
+            for (i=0; i<9; i++) {  
                 if (gameBoard[i] === "empty") {
                     gameBoard[i] = "gameover";
                 }
             }
             clearBoard();
             displayBoard();
+            //the following changes the active player with the winner
+            const element = document.getElementById("acti");
+            element.remove();
+            const p = document.createElement("p");
+            p.id = "acti";
+            const txt = players[0] + " won!";
+            p.textContent = txt;
+            document.getElementById("activePlr").appendChild(p);
         }
     else if (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard [2] === "O" ||
         gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard [5] === "O" ||
@@ -77,13 +86,22 @@ function chkWin () { //check if the game is won by one of the players
         gameBoard[1] === "O" && gameBoard[4] === "O" && gameBoard [7] === "O" ||
         gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard [8] === "O") {
             window.alert(players[1] + " wins!");
-            for (i=0; i<9; i++) { //prevents player to keep the game after someone won
+            // the following prevents player to keep the game after someone won
+            for (i=0; i<9; i++) { 
                 if (gameBoard[i] === "empty") {
                     gameBoard[i] = "gameover";
                 }
             }
             clearBoard();
             displayBoard();
+            //the following changes the active player with the winner
+            const element = document.getElementById("acti");
+            element.remove();
+            const p = document.createElement("p");
+            p.id = "acti";
+            const txt = players[0] + " won!";
+            p.textContent = txt;
+            document.getElementById("activePlr").appendChild(p);
         }
 }
 
